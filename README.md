@@ -1,9 +1,6 @@
-# A todoapp Flet app
+# ToDo приложение на фреймворке Flet на языке программирования Python.
 
-An example of a counter Flet app.
-
-To run the app:
-
-```
-flet run [app_directory]
-```
+# Команда:
+    Название команды: Double Trouble
+    •Кучашев Дауд
+    •Курманов Никита
