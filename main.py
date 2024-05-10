@@ -19,9 +19,10 @@ def main(page: ft.Page):
         ],
         # on_change=on_change
     )
-    page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
+
+    page.scroll = ft.ScrollMode.ADAPTIVE
+
     page.add(*home.controls)
-    # page.padding = ft.padding.only(top=2000)
 
 
 ft.app(target=main)
