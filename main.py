@@ -1,8 +1,17 @@
 import flet as ft
-import flet_core as ft_core
-import ui.home_page as home_ui
+from ui.pages import calendar_page, home_page, settings_page, task_parameters_page
 
-home = home_ui.HomePage()
+home = home_page.HomePage()
+settings = settings_page.SettingsPage()
+
+def on_change(e: ft.ControlEvent):
+    swtich = {
+        "0": settings.controls,
+        "1": home.controls
+        # "2":
+    }
+    e.page.controls = swtich[e.data]
+    e.page.update()
 
 
 def main(page: ft.Page):
@@ -17,12 +26,15 @@ def main(page: ft.Page):
                                      selected_icon=ft.icons.CALENDAR_MONTH,
                                      label="Календарь")
         ],
-        # on_change=on_change
+        on_change=on_change, border=ft.Border(top=ft.BorderSide(width=0))
     )
 
-    page.scroll = ft.ScrollMode.ADAPTIVE
+    page.scroll = ft.ScrollMode.HIDDEN
+    # page.floating_action_button_location = ft.FloatingActionButtonLocation.
+    # page.theme_mode = ft.ThemeMode.LIGHT
 
-    page.add(*home.controls)
+    page.add(*settings.controls)
 
 
-ft.app(target=main)
+if __name__ == "__main__":
+    ft.app(target=main)
