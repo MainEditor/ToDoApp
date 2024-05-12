@@ -1,20 +1,20 @@
 import flet as ft
 from ui.pages import calendar_page, home_page, settings_page, task_parameters_page
 
-home = home_page.HomePage()
-settings = settings_page.SettingsPage()
-
-def on_change(e: ft.ControlEvent):
-    swtich = {
-        "0": settings.controls,
-        "1": home.controls
-        # "2":
-    }
-    e.page.controls = swtich[e.data]
-    e.page.update()
-
 
 def main(page: ft.Page):
+    home: home_page.HomePage = home_page.HomePage(page)
+    settings: settings_page.SettingsPage = settings_page.SettingsPage(page)
+
+    def on_change(e: ft.ControlEvent):
+        switch = {
+            "0": settings.controls,
+            "1": home.controls
+            # "2":
+        }
+        e.page.controls = switch[e.data]
+        e.page.update()
+
     page.title = "ToDo"
     page.navigation_bar = ft.NavigationBar(
         destinations=[

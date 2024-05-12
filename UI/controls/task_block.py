@@ -1,6 +1,7 @@
 import flet as ft
+from typing import Any
 import datetime
-# import flet_core as ft_core
+from data_classes.task_block_mode_enum import TaskBlockMode
 from data_classes.task_priority import Priority, TaskPriority
 
 
@@ -17,10 +18,9 @@ class TaskBlock(ft.Card):
         self.edit_button: ft.IconButton = ft.IconButton(icon=ft.icons.EDIT)
         self.delete_button: ft.IconButton = ft.IconButton(icon=ft.icons.DELETE, icon_color=ft.colors.RED_ACCENT)
         self.description_text: ft.Text = ft.Text()
-        self.priority_mark: ft.Icon = ft.Icon(ft.icons.BOOKMARK, tooltip="Приоритет задачи",
-                                              color=self.priority.get_color(),
-                                              scale=1.1)
-        self.check_box: ft.Checkbox = ft.Checkbox(scale=1.1)
+        self.priority_mark: ft.Icon = ft.Icon(name=self.priority.get_icon(), tooltip=self.priority.get_text(),
+                                              color=self.priority.get_color())
+        self.check_box: ft.Checkbox = ft.Checkbox()
 
         self.left_column: ft.Column = ft.Column([self.priority_mark, self.check_box],
                                                 alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
@@ -32,9 +32,26 @@ class TaskBlock(ft.Card):
 
         super().__init__(ft.Container(self.row, padding=3))
 
+    def change_mode(self, change_to: TaskBlockMode):
+        if change_to == TaskBlockMode.EXTENDED:
+            self.row: ft.Row = ft.Row([self.left_column, self.task_text, self.right_column], spacing=0)
+        elif change_to == TaskBlockMode.COMPACT:
+            self.row: ft.Row = ft.Row([self.left_column, self.task_text], spacing=0)
+
+        self.content = ft.Container(self.row, padding=3)
+
 
 class InvisibleTaskBlock(TaskBlock):
     def __init__(self):
         super().__init__(Priority.LOW, str())
         self.opacity = 0
 
+
+class EmptyTaskBlock(TaskBlock):
+    def __init__(self):
+        super().__init__(Priority.LOW, "Текст вашей задачи")
+        self.delete_button.opacity = self.priority_mark.opacity = self.opacity = 0.7
+        self.disabled = True
+        self.check_box.value = True
+        self.task_text.expand = False
+        self.expand = True

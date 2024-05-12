@@ -14,9 +14,17 @@ class HomePage:
     # t1 = TaskBlock(Priority.HIGH, 'Сделать что-то очень важное')
     # t2 = TaskBlock(Priority.REPEATING, 'Сделать ещё что-то очень важное')
 
+    tasks = [TaskBlock(Priority.MEDIUM, "Дописать ТЗ проекта по проектному практикуму."),
+             TaskBlock(Priority.HIGH, "Доделать приложение."),
+             TaskBlock(Priority.LOW, "Посетить созвон с куратором."),
+             TaskBlock(Priority.MEDIUM, "Посетить онлайн пару."),
+             TaskBlock(Priority.HIGH, "Поработать на онлайн курсе."),
+             TaskBlock(Priority.REPEATING, "Записаться на предзащиту по проектному практикуму."),
+             ]
+
     today_tasks_column: ft.Column = ft.Column([
         ft.Row([today_tasks_text, sort_button], spacing=20, alignment=ft.MainAxisAlignment.CENTER),
-        *[TaskBlock(Priority.MEDIUM, str(i)) for i in range(10)],
+        *tasks,
     ])
 
     today_tasks_column.controls += [InvisibleTaskBlock()]
@@ -27,3 +35,6 @@ class HomePage:
         today_tasks_container,
         add_task_button
     ]
+
+    def __init__(self, page: ft.Page):
+        self.page = page
