@@ -3,6 +3,7 @@ from ui.controls import task_block
 from ui.pages.home_page import HomePage
 from data_classes.task_priority import Priority
 from data_classes.task_block_mode_enum import TaskBlockMode
+from typing import List
 
 
 class SettingsPage:
@@ -54,7 +55,7 @@ class SettingsPage:
 
         mode_container: ft.Container = ft.Container(theme_settings_column)
 
-        self.controls: [ft.Control] = [
+        self.controls: List[ft.Control] = [
             theme_settings_container,
             ft.Divider(),
             mode_container

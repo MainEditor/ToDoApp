@@ -5,13 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f48c2404-77f1-4aa0-8ccc-ba1e0392a203" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/data_classes/task_block_mode_enum.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/controls/task_block.py" beforeDir="false" afterPath="$PROJECT_DIR$/UI/controls/task_block.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/pages/home_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/UI/pages/home_page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/pages/settings_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/UI/pages/settings_page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_classes/task_priority.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_classes/task_priority.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,7 +112,7 @@
       <workItem from="1715354780890" duration="319000" />
       <workItem from="1715355130467" duration="379000" />
       <workItem from="1715355613495" duration="52244000" />
-      <workItem from="1715495558720" duration="23790000" />
+      <workItem from="1715495558720" duration="31614000" />
     </task>
     <servers />
   </component>

@@ -1,3 +1,4 @@
+import select
 import flet as ft
 from ui.pages import calendar_page, home_page, settings_page, task_parameters_page
 
@@ -14,6 +15,9 @@ def main(page: ft.Page):
         }
         e.page.controls = switch[e.data]
         e.page.update()
+    
+    # page.bullshit = 3
+    page.floating_action_button = ft.FloatingActionButton(icon=ft.icons.ADD, text="Добавить задачу")
 
     page.title = "ToDo"
     page.navigation_bar = ft.NavigationBar(
@@ -26,14 +30,15 @@ def main(page: ft.Page):
                                      selected_icon=ft.icons.CALENDAR_MONTH,
                                      label="Календарь")
         ],
-        on_change=on_change, border=ft.Border(top=ft.BorderSide(width=0))
+        on_change=on_change, selected_index=1
     )
 
     page.scroll = ft.ScrollMode.HIDDEN
     # page.floating_action_button_location = ft.FloatingActionButtonLocation.
     # page.theme_mode = ft.ThemeMode.LIGHT
 
-    page.add(*settings.controls)
+    page.controls = home.controls
+    page.update()
 
 
 if __name__ == "__main__":

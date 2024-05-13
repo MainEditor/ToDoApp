@@ -11,9 +11,9 @@ class Priority(Enum):
 
 class TaskPriority:
     def __init__(self, priority: Priority):
-        self.task_priority = priority
+        self.task_priority: Priority = priority
 
-    def get_color(self) -> ft.colors:
+    def get_color(self) -> str:
         switch = {
             Priority.HIGH: ft.colors.RED,
             Priority.MEDIUM: ft.colors.YELLOW,
@@ -31,7 +31,7 @@ class TaskPriority:
         }
         return switch[self.task_priority]
 
-    def get_icon(self) -> ft.icons:
+    def get_icon(self) -> str:
         if self.task_priority == Priority.REPEATING:
             return ft.icons.REPEAT
         return ft.icons.BOOKMARK
