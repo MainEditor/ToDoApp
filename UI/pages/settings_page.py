@@ -51,7 +51,7 @@ class SettingsPage:
             ft.Row(controls=[ft.Radio(value="EXTENDED"), extended_block]),
         ]), on_change=self.change_task_layout, value="EXTENDED")
 
-        theme_settings_column: ft.Column = ft.Column([ft.Text("Макет заадчи:", size=17), mode_selector])
+        theme_settings_column: ft.Column = ft.Column([ft.Text("Макет задачи:", size=17), mode_selector])
 
         mode_container: ft.Container = ft.Container(theme_settings_column)
 

@@ -12,8 +12,7 @@ from typing import List
     
 
 def sort_tasks(e: ft.ControlEvent):
-    HomePage.tasks = sorted(HomePage.tasks, key=lambda task: task.priority.task_priority.value, reverse= not HomePage.sort)
-    HomePage.sort = not HomePage.sort
+    HomePage.tasks = sorted(HomePage.tasks, key=lambda task: task.priority.task_priority.value, reverse=True)
     
     HomePage.today_tasks_column = ft.Column([
         ft.Row([HomePage.today_tasks_text, HomePage.sort_button], spacing=20, alignment=ft.MainAxisAlignment.CENTER),
@@ -33,7 +32,6 @@ def sort_tasks(e: ft.ControlEvent):
 
 class HomePage:
     sorted_by_priority: SortType = SortType.BY_PRIORITY
-    sort: bool = False
     
     tasks: List[TaskBlock] = [TaskBlock(Priority.MEDIUM, "Дописать ТЗ проекта по проектному практикуму."),
                               TaskBlock(Priority.HIGH, "Доделать приложение."),
