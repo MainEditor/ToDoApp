@@ -12,7 +12,7 @@ class TaskBlock(ft.Card):
                  task_text: str,
                  # notification_datetime: datetime.datetime,
                  # repetition_interval: str):
-                 ):
+                ):
         self.priority: TaskPriority = TaskPriority(priority)
 
         self.edit_button: ft.IconButton = ft.IconButton(icon=ft.icons.EDIT)
@@ -47,7 +47,7 @@ class InvisibleTaskBlock(TaskBlock):
         self.opacity = 0
 
 
-class EmptyTaskBlock(TaskBlock):
+class TranslucentTaskBlock(TaskBlock):
     def __init__(self):
         super().__init__(Priority.LOW, "Текст вашей задачи")
         self.delete_button.opacity = self.priority_mark.opacity = self.opacity = 0.7

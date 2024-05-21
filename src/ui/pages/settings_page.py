@@ -41,10 +41,10 @@ class SettingsPage:
         ])
         theme_settings_container: ft.Container = ft.Container(theme_settings_column, padding=ft.padding.only(top=30))
 
-        minimal_block = task_block.EmptyTaskBlock()
+        minimal_block = task_block.TranslucentTaskBlock()
         minimal_block.change_mode(TaskBlockMode.COMPACT)
 
-        extended_block = task_block.EmptyTaskBlock()
+        extended_block = task_block.TranslucentTaskBlock()
 
         mode_selector: ft.RadioGroup = ft.RadioGroup(content=ft.Column(controls=[
             ft.Row(controls=[ft.Radio(value="MINIMAL"), minimal_block]),
