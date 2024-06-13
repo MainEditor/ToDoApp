@@ -3,10 +3,20 @@ import flet as ft
 
 
 class Priority(Enum):
-    HIGH = 3
-    MEDIUM = 2
-    LOW = 1
-    REPEATING = 0
+    HIGH = "HIGH"
+    MEDIUM = "MEDIUM"
+    LOW = "LOW"
+    REPEATING = "REPEATING"
+
+
+def GetPriorityByValue(priority_value: str) -> Priority:
+    switch = {
+        "HIGH": Priority.HIGH,
+        "MEDIUM": Priority.MEDIUM,
+        "LOW": Priority.LOW,
+        "REPEATING": Priority.REPEATING
+    }
+    return switch[priority_value]
 
 
 class TaskPriority:

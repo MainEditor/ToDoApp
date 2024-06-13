@@ -1,19 +1,19 @@
 import flet as ft
-from typing import Any
-import datetime
+# import datetime
 from data_classes.task_block_mode_enum import TaskBlockMode
 from data_classes.task_priority import Priority, TaskPriority
+from data_classes.task import Task
 
 
 class TaskBlock(ft.Card):
-    def __init__(self,
+    def __init__(self, task: Task
                  # deadline: datetime.datetime,
-                 priority: Priority,
-                 task_text: str,
+                #  priority: Priority,
+                #  task_text: str,
                  # notification_datetime: datetime.datetime,
                  # repetition_interval: str):
                 ):
-        self.priority: TaskPriority = TaskPriority(priority)
+        self.priority: TaskPriority = TaskPriority(task.priority)
 
         self.edit_button: ft.IconButton = ft.IconButton(icon=ft.icons.EDIT)
         self.delete_button: ft.IconButton = ft.IconButton(icon=ft.icons.DELETE, icon_color=ft.colors.RED_ACCENT)
@@ -25,7 +25,7 @@ class TaskBlock(ft.Card):
         self.left_column: ft.Column = ft.Column([self.priority_mark, self.check_box],
                                                 alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
                                                 horizontal_alignment=ft.CrossAxisAlignment.CENTER)
-        self.task_text: ft.Container = ft.Container(ft.Text(task_text, size=18), expand=True)
+        self.task_text: ft.Container = ft.Container(ft.Text(task.task_text, size=18), expand=True)
         self.right_column: ft.Column = ft.Column([self.delete_button, self.edit_button], spacing=0)
 
         self.row: ft.Row = ft.Row([self.left_column, self.task_text, self.right_column], spacing=0)
@@ -43,13 +43,13 @@ class TaskBlock(ft.Card):
 
 class InvisibleTaskBlock(TaskBlock):
     def __init__(self):
-        super().__init__(Priority.LOW, str())
+        super().__init__(Task(Priority.LOW, str()))
         self.opacity = 0
 
 
 class TranslucentTaskBlock(TaskBlock):
     def __init__(self):
-        super().__init__(Priority.LOW, "Текст вашей задачи")
+        super().__init__(Task(Priority.LOW, "Текст вашей задачи"))
         self.delete_button.opacity = self.priority_mark.opacity = self.opacity = 0.7
         self.disabled = True
         self.check_box.value = True
