@@ -1,11 +1,14 @@
 import select
 import flet as ft
-from ui.pages import calendar_page, home_page, settings_page
+from ui.pages import calendar_page, home_page, settings_page, task_settings_page
 
 
 def main(page: ft.Page):
     # page.client_storage.clear()
-    print(page.client_storage.get("Tasks"))
+    # print(page.client_storage.get("Tasks"))
+
+    page.overlay.append(task_settings_page.TaskSettingsPage.time_picker)
+    page.overlay.append(task_settings_page.TaskSettingsPage.date_picker)
 
     # page.client_storage.clear()
     def getTasks():
@@ -22,9 +25,9 @@ def main(page: ft.Page):
             "1": home.controls
             # "2":
         }
+        # home_page.update_tasks(getTasks(), e=e)
         home_page.update_tasks(getTasks(), e)
         e.page.controls = switch[e.data]
-        print(home.controls)
         e.page.update()
     
     # page.bullshit = 3

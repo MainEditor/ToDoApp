@@ -1,7 +1,6 @@
 from typing import List
 import flet as ft
 from data_classes.task_priority import Priority, GetPriorityByValue
-from ui.controls.task_block import TaskBlock
 from data_classes.task import Task
 import datetime
 from ui.pages import home_page
@@ -12,21 +11,24 @@ def select_date(e: ft.ControlEvent):
 def select_time(e: ft.ControlEvent):
     TaskSettingsPage.time_picker.pick_time()
 
+# def change_date(e: ft.ControlEvent):
+#     # print(f"Date picker changed, value is {TaskSettingsPage.date_picker.value}")
+#     ...
 
 
-def change_date(e: ft.ControlEvent):
-    # print(f"Date picker changed, value is {TaskSettingsPage.date_picker.value}")
-    ...
-
-
-def change_time(e: ft.ControlEvent):
-    ...
+# def change_time(e: ft.ControlEvent):
+#     ...
 
 def save_and_write_task(e: ft.ControlEvent):
 
     print("ЗАДАЧА ДОБАВЛЕНА")
 
-    if TaskSettingsPage.priority_selector.value == None or TaskSettingsPage.task_text_input.value == "":
+    task_text = TaskSettingsPage.task_text_input.value
+    priority = TaskSettingsPage.priority_selector.value
+
+    TaskSettingsPage.task_text_input.value = TaskSettingsPage.priority_selector.value = None
+
+    if priority == None or task_text == "":
         e.page.snack_bar = ft.SnackBar(content=ft.Row([ft.Icon(ft.icons.WARNING, color=ft.colors.RED), ft.Text("Укажите приоритет и/или введите текст!")]))
         e.page.snack_bar.open = True
         e.page.update()
@@ -34,15 +36,14 @@ def save_and_write_task(e: ft.ControlEvent):
     
     if e.page.client_storage.contains_key("Tasks"):
         updated_tasks = e.page.client_storage.get("Tasks")
-        updated_tasks += [Task(priority=GetPriorityByValue(TaskSettingsPage.priority_selector.value),
-                                    task_text=TaskSettingsPage.task_text_input.value)]
+        updated_tasks += [Task(priority=GetPriorityByValue(priority),
+                                    task_text=task_text)]
         e.page.client_storage.set("Tasks", updated_tasks)
         home_page.update_tasks(tasks=e.page.client_storage.get("Tasks"), e=e)
-        e.page.update()
         return
 
-    created_tasks = [Task(priority=GetPriorityByValue(TaskSettingsPage.priority_selector.value),
-                               task_text=TaskSettingsPage.task_text_input.value)]
+    created_tasks = [Task(priority=GetPriorityByValue(priority),
+                               task_text=task_text)]
     
     e.page.client_storage.set("Tasks", created_tasks)
     home_page.update_tasks(tasks=e.page.client_storage.get("Tasks"), e=e)
@@ -73,7 +74,7 @@ class TaskSettingsPage:
         cancel_text="Отмена",
         confirm_text="Выбрать",
         help_text="Выберите дату",
-        on_change=change_date,
+        # on_change=change_date,
         # on_dismiss=date_picker_dismissed,
         last_date=datetime.datetime.max,
     )
@@ -83,7 +84,7 @@ class TaskSettingsPage:
         cancel_text="Отмена",
         error_invalid_text="Ошибка",
         help_text="Выберите время",
-        on_change=change_time,
+        # on_change=change_time,
         # on_dismiss=dismissed,
     )
 
@@ -106,6 +107,6 @@ class TaskSettingsPage:
 
     def __init__(self, page: ft.Page) -> None:
         self.page: ft.Page = page
-        page.overlay.append(self.date_picker)
-        page.overlay.append(self.time_picker)
+        # page.overlay.append(self.date_picker)
+        # page.overlay.append(self.time_picker)
         # self.page.overlay.append(self.date_selector))
